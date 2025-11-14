@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICBT - Our Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <!-- Page Loader -->
+    <!-- UPDATED: Now contains the icon -->
+    <div id="page-loader"><i class="fas fa-flask"></i></div>
+
+    <!-- Header -->
+    <header id="header">
+        <!-- NEW LOCATION for Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+
+        <nav>
+            <div class="logo">
+                <i class="fas fa-flask"></i>
+                <span>ICBT</span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="contact.html" class="cta-btn">Get Started</a></li>
+            </ul>
+            <button class="hamburger-menu" id="hamburger-menu" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- This container provides the top/bottom margin and padding -->
+        <div class="detail-page-container">
+            <section class="services-section" style="padding: 0; max-width: none;">
+                <div class="section-header animate-on-scroll">
+                    <div class="section-tag">OUR SERVICES</div>
+                    <h2 class="section-title">Our Services</h2>
+                    <p class="section-subtitle">Complete testing solutions for accurate environmental analysis</p>
+                </div>
+
+                <div class="services-grid">
+                    <!-- Service cards are now links -->
+                    <a href="water-analysis.html" class="service-card animate-on-scroll">
+                        <div class="service-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h3>Water Analysis</h3>
+                        <p>Comprehensive water testing for residential, commercial, and industrial applications. Complete analysis of contaminants, pH levels, mineral content, and regulatory compliance.</p>
+                        <span class="service-link">
+                            Learn more
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </a>
+
+                    <a href="soil-analysis.html" class="service-card animate-on-scroll">
+                        <div class="service-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h3>Soil Analysis</h3>
+                        <p>Precision soil composition testing for agriculture, construction, and environmental projects. Advanced nutrient profiling, contamination detection, and pH analysis.</p>
+                        <span class="service-link">
+                            Learn more
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </a>
+
+                    <a href="chemical-supply.html" class="service-card animate-on-scroll">
+                        <div class="service-icon">
+                            <i class="fas fa-vials"></i>
+                        </div>
+                        <h3>Chemical Supply</h3>
+                        <p>Premium laboratory and industrial chemicals with complete safety documentation. Extensive range of reagents, acids, bases, and specialty compounds.</p>
+                        <span class="service-link">
+                            Learn more
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </a>
+
+                    <a href="cleaning-products.html" class="service-card animate-on-scroll">
+                        <div class="service-icon">
+                            <i class="fas fa-spray-can"></i>
+                        </div>
+                        <h3>Cleaning Products</h3>
+                        <p>Professional-grade cleaning solutions for commercial and industrial use. Eco-friendly formulations, powerful disinfectants, and specialized products.</p>
+                        <span class="service-link">
+                            Learn more
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 <span class="footer-gold">ICBT</span> - Environmental Analysis Excellence</p>
+        <p style="opacity: 0.8; margin-top: 0.5rem;">Professional Testing | Chemical Supply | Cleaning Solutions</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Ensures proper rendering and touch zooming on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICBT - Environmental Analysis & Chemical Innovation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Shared Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <!-- Page Loader -->
+    <!-- UPDATED: Now contains the icon -->
+    <div id="page-loader"><i class="fas fa-flask"></i></div>
+
+    <!-- Header -->
+    <header id="header">
+        <!-- NEW LOCATION for Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+
+        <nav>
+            <div class="logo">
+                <i class="fas fa-flask"></i>
+                <span>ICBT</span>
+            </div>
+            
+            <!-- Navigation Links -->
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="contact.html" class="cta-btn">Get Started</a></li>
+            </ul>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger-menu" id="hamburger-menu" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <!-- Home Page Container -->
+        <section id="home-page">
+            <section class="hero-section" id="hero">
+                <div class="hero-content">
+                    <!-- Added animate-on-scroll for page load animation -->
+                    <h1>Precision <span>Environmental Analysis</span> & Chemical Innovation</h1>
+                    <p>ICBT stands at the forefront of environmental analysis and chemical innovation. With decades of combined expertise in water and soil testing, we deliver precise, reliable results that empower businesses, municipalities, and individuals to make informed decisions.</p>
+                    <div class="hero-buttons">
+                        <a href="contact.html" class="primary-btn">
+                            Request Testing
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="services.html" class="secondary-btn">
+                            Our Services
+                            <i class="fas fa-play-circle"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-card animate-on-scroll">
+                    <div class="card-header">Environmental Analysis</div>
+                    <div class="card-title">Track quality, get results, stress less</div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-vial"></i>
+                            </div>
+                            <div class="stat-value">2,500+</div>
+                            <div class="stat-label">Tests completed</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="stat-value">98.9%</div>
+                            <div class="stat-label">Accuracy rate</div>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <div class="chart-header">Testing Volume</div>
+                        <div class="chart-placeholder">
+                            <div class="chart-line"></div>
+                        </div>
+                    </div>
+
+                    <div class="feature-tags">
+                        <div class="feature-tag">
+                            <i class="fas fa-check-circle"></i>
+                            Water Testing
+                        </div>
+                        <div class="feature-tag">
+                            <i class="fas fa-check-circle"></i>
+                            Soil Analysis
+                        </div>
+                        <div class="feature-tag">
+                            <i class="fas fa-check-circle"></i>
+                            Fast Results
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services Section (on Home Page) -->
+            <section id="services" class="services-section">
+                <div class="section-header animate-on-scroll">
+                    <div class="section-tag">OUR SERVICES</div>
+                    <h2 class="section-title">Complete testing solutions</h2>
+                    <p class="section-subtitle">Everything you need for accurate environmental analysis</p>
+                </div>
+
+                <div class="services-grid">
+                    <!-- Service cards are now links -->
+                    <a href="water-analysis.html" class="service-card animate-on-scroll">
+                        <div class="service-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h3>Water Analysis</h3>
+                        <p>Comprehensive water testing for residential, commercial, and industrial applications. Complete analysis of contaminants, pH levels, mineral content, and regulatory compliance.</p>
+                        <span class="service-link">
+                            Learn more
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </a>
+
+                    <a href="soil-analysis.html" class="service-card animate-on-scroll">
+                        <div class="service-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h3>Soil Analysis</h3>
+                        <p>Precision soil composition testing for agriculture, construction, and environmental projects. Advanced nutrient profiling, contamination detection, and pH analysis.</p>
+                        <span class="service-link">
+                            Learn more
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </a>
+
+                    <a href="chemical-supply.html" class="service-card animate-on-scroll">
+                        <div class="service-icon">
+                            <i class="fas fa-vials"></i>
+                        </div>
+                        <h3>Chemical Supply</h3>
+                        <p>Premium laboratory and industrial chemicals with complete safety documentation. Extensive range of reagents, acids, bases, and specialty compounds.</p>
+                        <span class="service-link">
+                            Learn more
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </a>
+
+                    <a href="cleaning-products.html" class="service-card animate-on-scroll">
+                        <div class="service-icon">
+                            <i class="fas fa-spray-can"></i>
+                        </div>
+                        <h3>Cleaning Products</h3>
+                        <p>Professional-grade cleaning solutions for commercial and industrial use. Eco-friendly formulations, powerful disinfectants, and specialized products.</p>
+                        <span class="service-link">
+                            Learn more
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- About Section (on Home Page) -->
+            <section id="about" class="about-section">
+                <div class="about-content animate-on-scroll">
+                    <div class="section-tag">ABOUT US</div>
+                    <h2>Decades of Expertise in Environmental Analysis</h2>
+                    <p>Our state-of-the-art laboratory facilities, coupled with our team of certified technicians and environmental scientists, ensure the highest standards of accuracy and professionalism.</p>
+                    <p>We're committed to protecting our planet's precious resources through rigorous testing and sustainable chemical solutions.</p>
+                    
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Certified technicians and environmental scientists</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>State-of-the-art laboratory facilities</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Decades of combined expertise</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Sustainable chemical solutions</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-image animate-on-scroll">
+                    <div class="about-image-content">
+                        <i class="fas fa-microscope"></i>
+                        <h3>Advanced Laboratory Analysis</h3>
+                        <p>Precision testing with cutting-edge technology</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section (on Home Page) -->
+            <section id="contact" class="contact-section">
+                <div class="contact-card animate-on-scroll">
+                    <div class="section-tag">GET IN TOUCH</div>
+                    <h2 class="section-title">Ready to start testing?</h2>
+                    <p class="section-subtitle">Our team of experts is here to help with all your analysis needs</p>
+
+                    <div class="contact-grid">
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <h3>Call Us</h3>
+                            <p>+1 (555) 123-4567</p>
+                            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Mon-Fri: 8AM - 6PM</p>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h3>Email Us</h3>
+                            <p>info@icbt.com</p>
+                            <p style="margin-top: 0.5rem; font-size: 0.9rem;">support@icbt.com</p>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h3>Visit Us</h3>
+                            <p>123 Analysis Drive</p>
+                            <p>Laboratory City, LC 12345</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 <span class="footer-gold">ICBT</span> - Environmental Analysis Excellence</p>
+        <p style="opacity: 0.8; margin-top: 0.5rem;">Professional Testing | Chemical Supply | Cleaning Solutions</p>
+    </footer>
+
+    <!-- Shared JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
