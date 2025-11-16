@@ -3,120 +3,612 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ICBT - Soil Analysis</title>
+    <title>Soil Analysis - ICBT</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1e3c72;
+            --secondary-blue: #2a5298;
+            --light-blue: #dbeafe;
+            --gold: #d4af37;
+            --light-gold: #f4d03f;
+            --dark-text: #1e293b;
+            --medium-text: #475569;
+            --light-text: #64748b;
+            --white: #ffffff;
+            --light-bg: #f8fafc;
+            --border: #e2e8f0;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.12);
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.6);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 50%, #fce7f3 100%);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .scan-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            box-shadow: 0 0 10px var(--gold);
+            z-index: 1001;
+            animation: scan 4s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes scan {
+            0% { top: 0; }
+            50% { top: 100%; }
+            100% { top: 0; }
+        }
+
+        header {
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            background: var(--glass-bg);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--medium-text);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .cta-btn {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 0.7rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cta-btn:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(30, 60, 114, 0.3);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            cursor: pointer;
+            z-index: 1002;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: var(--glass-bg);
+            -webkit-backdrop-filter: blur(40px);
+            backdrop-filter: blur(40px);
+            padding: 5rem 2rem 2rem;
+            transition: right 0.3s ease;
+            z-index: 1001;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-menu-links a {
+            color: var(--dark-text);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            display: block;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        main {
+            max-width: 1400px;
+            margin: 150px auto 100px;
+            padding: 0 1.5rem;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            gap: 0.8rem;
+        }
+
+        .service-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .service-header-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--light-blue), #e0e7ff);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .service-header-icon i {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+        }
+
+        .service-header-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 12px;
+        }
+
+        .service-header-content h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--dark-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .service-header-content p {
+            font-size: 1.2rem;
+            color: var(--light-text);
+        }
+
+        .service-details {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+
+        .service-info h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-info p {
+            font-size: 1.1rem;
+            color: var(--light-text);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            margin-top: 2rem;
+        }
+
+        .service-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-feature-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--light-blue), #e0e7ff);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .service-feature-icon i {
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+        }
+
+        .service-feature-content h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .service-feature-content p {
+            font-size: 1rem;
+            color: var(--light-text);
+            margin-bottom: 0;
+        }
+
+        .service-sidebar {
+            background: var(--glass-bg);
+            -webkit-backdrop-filter: blur(40px);
+            backdrop-filter: blur(40px);
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow);
+            height: fit-content;
+        }
+
+        .service-sidebar h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-sidebar-list {
+            list-style: none;
+        }
+
+        .service-sidebar-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .service-sidebar-list li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .service-sidebar-list i {
+            color: var(--gold);
+            font-size: 1rem;
+        }
+
+        footer {
+            background: var(--primary-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem;
+            margin-top: 100px;
+        }
+
+        footer p {
+            opacity: 0.9;
+        }
+
+        .footer-gold {
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .footer-subtitle {
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 968px) {
+            .service-details {
+                grid-template-columns: 1fr;
+            }
+
+            .service-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .service-header-content h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .service-header-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .service-info h2 {
+                font-size: 1.5rem;
+            }
+
+            .service-sidebar {
+                padding: 1.5rem;
+            }
+
+            .service-feature {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .service-feature-icon {
+                margin: 0 auto 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            main {
+                margin: 120px auto 80px;
+                padding: 0 1rem;
+            }
+
+            .service-header-content h1 {
+                font-size: 1.5rem;
+            }
+
+            .service-info h2 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    
-    <!-- Page Loader -->
-    <!-- UPDATED: Now contains the icon -->
-    <div id="page-loader"><i class="fas fa-flask"></i></div>
+    <div class="scan-line"></div>
 
-    <!-- Header -->
     <header id="header">
-        <!-- NEW LOCATION for Mobile Menu Overlay -->
-        <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
-
         <nav>
-            <div class="logo">
+            <a href="index.html" class="logo">
                 <i class="fas fa-flask"></i>
                 <span>ICBT</span>
-            </div>
-            <ul class="nav-links" id="nav-links">
+            </a>
+            <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="contact.html" class="cta-btn">Get Started</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="index.html#contact" class="cta-btn">Get Started</a></li>
             </ul>
-            <button class="hamburger-menu" id="hamburger-menu" aria-label="Toggle menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
             </button>
         </nav>
     </header>
 
-    <!-- Main Content -->
-    <main id="main-content">
-        <div class="detail-page-container">
-            <a href="services.html" class="back-btn">
-                <i class="fas fa-arrow-left"></i>
-                Back to Services
-            </a>
-            
-            <div class="service-header">
-                <div class="service-header-icon">
-                    <i class="fas fa-seedling"></i>
-                </div>
-                <div class="service-header-content">
-                    <h2>Soil Analysis</h2>
-                    <p>Precision soil testing for agriculture, construction, and environmental projects</p>
-                </div>
-            </div>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-menu-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="index.html#contact" class="cta-btn">Get Started</a></li>
+        </ul>
+    </div>
 
-            <div class="service-details">
-                <div class="service-info">
-                    <h3>Comprehensive Soil Assessment</h3>
-                    <p>Our soil analysis services provide detailed insights into soil composition, nutrient levels, and potential contaminants. Whether for agricultural optimization, construction planning, or environmental remediation, our precise testing delivers the data you need.</p>
+    <main>
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Back to Services
+        </a>
+        
+        <div class="service-header">
+                <div class="service-header-icon">
+                    <img src="images/Soil%20analysis.jpg" alt="Soil Analysis" class="service-header-img" loading="lazy">
+                </div>
+            <div class="service-header-content">
+                <h1>Soil Analysis</h1>
+                <p>Precision soil composition testing for agriculture and environmental projects</p>
+            </div>
+        </div>
+
+        <div class="service-details">
+            <div class="service-info">
+                <h2>Advanced Soil Composition Testing</h2>
+                <p>Our soil analysis services provide precision testing for agriculture, construction, and environmental projects. We deliver comprehensive results that help optimize agricultural productivity and ensure environmental safety.</p>
+                
+                <div class="service-features">
+                    <div class="service-feature">
+                        <div class="service-feature-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="service-feature-content">
+                            <h3>Nutrient Profiling</h3>
+                            <p>Complete analysis of nitrogen, phosphorus, potassium, and micronutrients to optimize fertilizer application and crop yield.</p>
+                        </div>
+                    </div>
                     
-                    <div class="service-features">
-                        <div class="service-feature">
-                            <div class="service-feature-icon">
-                                <i class="fas fa-leaf"></i>
-                            </div>
-                            <div class="service-feature-content">
-                                <h4>Nutrient Profiling</h4>
-                                <p>Comprehensive analysis of essential nutrients including nitrogen, phosphorus, potassium, and micronutrients to optimize soil fertility and crop production.</p>
-                            </div>
+                    <div class="service-feature">
+                        <div class="service-feature-icon">
+                            <i class="fas fa-binoculars"></i>
                         </div>
-                        
-                        <div class="service-feature">
-                            <div class="service-feature-icon">
-                                <i class="fas fa-exclamation-triangle"></i>
-                            </div>
-                            <div class="service-feature-content">
-                                <h4>Contamination Detection</h4>
-                                <p>Identify and quantify soil contaminants including heavy metals, petroleum hydrocarbons, pesticides, and other pollutants that may impact soil health.</p>
-                            </div>
+                        <div class="service-feature-content">
+                            <h3>Contamination Detection</h3>
+                            <p>Identify heavy metals, pesticide residues, and other contaminants that may affect soil health and crop safety.</p>
                         </div>
-                        
-                        <div class="service-feature">
-                            <div class="service-feature-icon">
-                                <i class="fas fa-chart-pie"></i>
-                            </div>
-                            <div class="service-feature-content">
-                                <h4>Soil Composition</h4>
-                                <p>Detailed analysis of soil texture, structure, organic matter content, and other physical properties that influence soil behavior and suitability for various applications.</p>
-                            </div>
+                    </div>
+                    
+                    <div class="service-feature">
+                        <div class="service-feature-icon">
+                            <i class="fas fa-sliders-h"></i>
+                        </div>
+                        <div class="service-feature-content">
+                            <h3>pH & Texture Analysis</h3>
+                            <p>Comprehensive assessment of soil pH levels, texture, structure, and organic matter content for optimal growing conditions.</p>
                         </div>
                     </div>
                 </div>
-                
-                <div class="service-sidebar">
-                    <h3>Testing Parameters</h3>
-                    <ul class="service-sidebar-list">
-                        <li><i class="fas fa-check"></i> Nutrient Levels</li>
-                        <li><i class="fas fa-check"></i> pH & Salinity</li>
-                        <li><i class="fas fa-check"></i> Heavy Metals</li>
-                        <li><i class="fas fa-check"></i> Organic Matter</li>
-                        <li><i class="fas fa-check"></i> Soil Texture</li>
-                        <li><i class="fas fa-check"></i> Contaminant Screening</li>
-                        <li><i class="fas fa-check"></i> Cation Exchange Capacity</li>
-                        <li><i class="fas fa-check"></i> Microbial Activity</li>
-                    </ul>
-                </div>
+            </div>
+            
+            <div class="service-sidebar">
+                <h2>Analysis Parameters</h2>
+                <ul class="service-sidebar-list">
+                    <li><i class="fas fa-check"></i> pH Level</li>
+                    <li><i class="fas fa-check"></i> Nitrogen Content</li>
+                    <li><i class="fas fa-check"></i> Phosphorus Level</li>
+                    <li><i class="fas fa-check"></i> Potassium Content</li>
+                    <li><i class="fas fa-check"></i> Micronutrients</li>
+                    <li><i class="fas fa-check"></i> Organic Matter</li>
+                    <li><i class="fas fa-check"></i> Heavy Metals</li>
+                    <li><i class="fas fa-check"></i> Soil Texture</li>
+                </ul>
             </div>
         </div>
     </main>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2025 <span class="footer-gold">ICBT</span> - Environmental Analysis Excellence</p>
-        <p style="opacity: 0.8; margin-top: 0.5rem;">Professional Testing | Chemical Supply | Cleaning Solutions</p>
+        <p class="footer-subtitle">Professional Testing | Chemical Supply | Cleaning Solutions</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+        
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        mobileMenuOverlay.addEventListener('click', toggleMobileMenu);
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-menu-links a').forEach(link => {
+            link.addEventListener('click', toggleMobileMenu);
+        });
+    </script>
 </body>
 </html>
